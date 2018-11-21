@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
+import { ActiveLaundryListPage } from '../active-laundry-list/active-laundry-list';
+import { LaundryTemplateListPage } from '../laundry-template-list/laundry-template-list';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  activeLaundryTab = ActiveLaundryListPage;
+  laundryTemplateTab = LaundryTemplateListPage;
+  settingsTab = SettingsPage;
 
   constructor() {
 
