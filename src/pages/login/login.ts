@@ -27,7 +27,6 @@ export class LoginPage {
   }
 
   login() {
-    console.log('Login!');
     this.authenticationProvider.login(this.email, this.password);
   }
 

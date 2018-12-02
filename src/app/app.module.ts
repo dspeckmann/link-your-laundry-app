@@ -14,6 +14,9 @@ import { ActiveLaundryListPage } from '../pages/active-laundry-list/active-laund
 import { LaundryTemplateListPage } from '../pages/laundry-template-list/laundry-template-list';
 import { SettingsPage } from '../pages/settings/settings';
 import { LaundryProvider } from '../providers/laundry/laundry';
+import { ActiveLaundryDetailsPage } from '../pages/active-laundry-details/active-laundry-details';
+import { AddActiveLaundryPage } from '../pages/add-active-laundry/add-active-laundry';
+import { EditLaundryTemplatePage } from '../pages/edit-laundry-template/edit-laundry-template';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { LaundryProvider } from '../providers/laundry/laundry';
     TabsPage,
     LoginPage,
     ActiveLaundryListPage,
+    AddActiveLaundryPage,
+    ActiveLaundryDetailsPage,
     LaundryTemplateListPage,
+    EditLaundryTemplatePage,
     SettingsPage
   ],
   imports: [
@@ -36,7 +42,10 @@ import { LaundryProvider } from '../providers/laundry/laundry';
     TabsPage,
     LoginPage,
     ActiveLaundryListPage,
+    AddActiveLaundryPage,
+    ActiveLaundryDetailsPage,
     LaundryTemplateListPage,
+    EditLaundryTemplatePage,
     SettingsPage
   ],
   providers: [
@@ -45,8 +54,7 @@ import { LaundryProvider } from '../providers/laundry/laundry';
     AuthenticationProvider,
     LaundryProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-    LaundryProvider
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
   ]
 })
 export class AppModule {}

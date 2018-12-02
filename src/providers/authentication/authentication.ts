@@ -41,11 +41,19 @@ export class AuthenticationProvider {
 
   public login(email: string, password: string) {
     this.http.post<LoginResponse>(AppConfig.apiUrl + 'authentication', { username: email, password }).subscribe(res => {
+      console.log('Logged in');
+      console.log(res);
       this.token = res.token;
       this.storage.set('token', this.token);
       this.authenticationSubject.next(true);
     }, err => {
       console.error('Error during login!');
     });
+  }
+
+  public logout() {
+    this.token = null;
+    this.storage.remove('token');
+    this.authenticationSubject.next(false);
   }
 }

@@ -14,5 +14,18 @@
 
 
 <ion-content padding>
+  <ion-fab bottom right>
+    <button ion-fab color="primary" (click)="add()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 
+  <ion-card *ngIf="laundryTemplates.length < 1">
+    <ion-card-content>
+      You have not yet defined any laundry templates.
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+      <ion-item *ngFor="let laundryTemplate of laundryTemplates" (click)="edit(laundryTemplate)">
+        {{laundryTemplate.name}}
+      </ion-item>
+    </ion-list>
 </ion-content>

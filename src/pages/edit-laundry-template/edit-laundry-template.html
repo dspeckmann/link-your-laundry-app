@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Laundry Template</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="save()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="laundryTemplate.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Detergent</ion-label>
+      <ion-input type="text" [(ngModel)]="laundryTemplate.detergent" name="detergent"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Wash Cycle</ion-label>
+      <ion-input type="text" [(ngModel)]="laundryTemplate.washCycle" name="washCycle"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Wash Duration</ion-label>
+      <ion-input type="time" [(ngModel)]="laundryTemplate.washDuration" name="washDuration"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dry Cycle</ion-label>
+      <ion-input type="text" [(ngModel)]="laundryTemplate.dryCycle" name="dryCycle"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dry Duration</ion-label>
+      <ion-input type="time" [(ngModel)]="laundryTemplate.dryDuration" name="dryDuration"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button full click="save()">Save</button>
+    </ion-item>
+  </form>
+</ion-content>
