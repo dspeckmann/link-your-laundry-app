@@ -12,16 +12,17 @@ import { LaundryTemplate } from '../../interfaces/laundry-template';
 export class LaundryTemplateListPage {
   laundryTemplates: LaundryTemplate[] = [];
 
-  constructor(public navCtrl: NavController, alertCtrl: AlertController, public navParams: NavParams, private laundryProvider: LaundryProvider) {
-    this.laundryProvider.getAllLaundryTemplates().subscribe(res => {
-      this.laundryTemplates = res;
-    }, err => {
-      alertCtrl.create({ title: 'Error', message: 'Laundry templates could not be loaded.' }).present();
-    });
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private laundryProvider: LaundryProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LaundryTemplateListPage');
+  load(refresher) {
+    this.laundryProvider.getAllLaundryTemplates().subscribe(res => {
+      this.laundryTemplates = res;
+      refresher.complete();
+    }, err => {
+      this.alertCtrl.create({ title: 'Error', message: 'Laundry templates could not be loaded.' }).present();
+      refresher.complete();
+    });
   }
 
   add() {

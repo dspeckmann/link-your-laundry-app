@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AppConfig } from '../../app/app.config';
 import { ActiveLaundry } from '../../interfaces/active-laundry';
 import { LaundryTemplate } from '../../interfaces/laundry-template';
+import { CreateActiveLaundry } from '../../interfaces/create-active-laundry';
 
 @Injectable()
 export class LaundryProvider {
@@ -17,6 +18,15 @@ export class LaundryProvider {
   // Returns all templates, own and group owned
   public getAllLaundryTemplates() {
     return this.http.get<LaundryTemplate[]>(AppConfig.apiUrl + 'laundrytemplates');
+  }
+
+  /**
+   * This function adds a new active laundry based on a start time and a template.
+   * @param viewModel The view model to create a new active laundry.
+   */
+  public addActiveLaundry(viewModel: CreateActiveLaundry) {
+    console.log('HEY');
+    return this.http.post<ActiveLaundry>(AppConfig.apiUrl + 'activelaundries', viewModel);
   }
 
   public addLaundryTemplate(laundryTemplate: LaundryTemplate) {

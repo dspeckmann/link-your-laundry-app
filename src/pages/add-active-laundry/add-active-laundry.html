@@ -14,5 +14,17 @@
 
 
 <ion-content padding>
-
+  <ion-item>
+    <ion-label>Template</ion-label>
+    <ion-select [(ngModel)]="viewModel.laundryTemplateId">
+      <ion-option *ngFor="let template of availableTemplates" [value]="template.id">{{template.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Started at</ion-label>
+    <ion-datetime displayFormat="HH:mm" [(ngModel)]="viewModel.washStartTime"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <button ion-button full (click)="save()">Save</button>
+  </ion-item>
 </ion-content>
