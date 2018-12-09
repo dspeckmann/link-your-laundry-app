@@ -27,14 +27,23 @@
       There are no active laundries at the moment.
     </ion-card-content>
   </ion-card>
-  <ion-list>
-    <ion-item *ngFor="let activeLaundry of activeLaundries">
-      <ion-label>
-        {{activeLaundry.laundryTemplate.name}}
-      </ion-label><br>
-      <div item-content>
-        {{getStatus(activeLaundry)}}
-      </div>
-    </ion-item>
-  </ion-list>
+  <ion-card *ngFor="let activeLaundry of activeLaundries">
+    <ion-card-header>
+      {{activeLaundry.laundryTemplate.name}}
+    </ion-card-header>
+    <ion-card-content [ngSwitch]="activeLaundry.status">
+      <p *ngSwitchCase="LaundryStatus.Washing">
+        Washing<br />{{activeLaundry.timeLeft | date:'h:mm:ss'}} left
+      </p>
+      <p *ngSwitchCase="LaundryStatus.ReadyToDry" style="color:green;">
+        Ready to dry
+      </p>
+      <p *ngSwitchCase="LaundryStatus.Drying">
+        Washing<br />{{activeLaundry.timeLeft | date:'h:mm:ss'}} left
+      </p>
+      <p *ngSwitchCase="LaundryStatus.Finished" style="color:green;">
+        Finished
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

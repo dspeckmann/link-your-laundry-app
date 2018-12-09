@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { LaundryProvider } from '../../providers/laundry/laundry';
 import { ActiveLaundry } from '../../interfaces/active-laundry';
 import { AddActiveLaundryPage } from '../add-active-laundry/add-active-laundry';
+import * as moment from 'moment';
+import { LaundryStatus } from '../../interfaces/laundry-status';
 
 @IonicPage()
 @Component({
@@ -10,19 +12,28 @@ import { AddActiveLaundryPage } from '../add-active-laundry/add-active-laundry';
   templateUrl: 'active-laundry-list.html',
 })
 export class ActiveLaundryListPage {
-
+  LaundryStatus = LaundryStatus;
   activeLaundries: ActiveLaundry[] = [];
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private laundryProvider: LaundryProvider) {
+    this.updateLaundryStatus();
   }
 
-  load(refresher) {
+  ionViewWillEnter() {
+    this.load();
+  }
+
+  load(refresher?) {
     this.laundryProvider.getActiveLaundries().subscribe(res => {
       this.activeLaundries = res;
-      refresher.complete();
+      if(refresher) {
+        refresher.complete();
+      }
     }, err => {
       this.alertCtrl.create({ title: 'Error', message: 'Active laundries could not be loaded.' }).present();
-      refresher.complete();
+      if(refresher) {
+        refresher.complete();
+      }
     });
   }
 
@@ -30,20 +41,32 @@ export class ActiveLaundryListPage {
     this.navCtrl.push(AddActiveLaundryPage);
   }
 
-  getStatus(laundry: ActiveLaundry) {
-    const now = new Date();
-    if(new Date(laundry.washStartTime).getTime() + new Date(laundry.laundryTemplate.washDuration).getTime() > now.getTime()) {
-      return "Washing";
-    }
-
-    if(laundry.dryStartTime) {
-      if(new Date(laundry.dryStartTime).getTime() + new Date(laundry.laundryTemplate.dryDuration).getTime() > now.getTime()) {
-        return "Drying";
+  updateLaundryStatus() {
+    // Not working properly
+    this.activeLaundries.forEach(laundry => {
+      let start: moment.Moment;
+      let end: moment.Moment;
+      if(laundry.dryStartTime) {
+        start = moment(laundry.dryStartTime);
+        end = start.add(moment.duration(laundry.laundryTemplate.dryDuration));
+        if(end > moment()) {
+          laundry.status = LaundryStatus.Drying;
+        } else {
+          laundry.status = LaundryStatus.Finished;
+        }
+      } else {
+        start = moment(laundry.washStartTime);
+        end = start.add(moment.duration(laundry.laundryTemplate.washDuration));
+        if(end > moment()) {
+          laundry.status = LaundryStatus.Washing;
+        } else {
+          laundry.status = LaundryStatus.ReadyToDry;
+        }
       }
 
-      return "Finished";
-    }
-
-    return "Ready to dry";
+      const left = end.diff(moment());
+      laundry.timeLeft = moment(left).toDate();
+    });
+    setTimeout(() => this.updateLaundryStatus(), 1000);
   }
 }

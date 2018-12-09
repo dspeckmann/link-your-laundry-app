@@ -15,13 +15,21 @@ export class LaundryTemplateListPage {
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private laundryProvider: LaundryProvider) {
   }
 
-  load(refresher) {
+  ionViewWillEnter() {
+    this.load();
+  }
+
+  load(refresher?) {
     this.laundryProvider.getAllLaundryTemplates().subscribe(res => {
       this.laundryTemplates = res;
-      refresher.complete();
+      if(refresher) {
+        refresher.complete();
+      }
     }, err => {
       this.alertCtrl.create({ title: 'Error', message: 'Laundry templates could not be loaded.' }).present();
-      refresher.complete();
+      if(refresher) {
+        refresher.complete();
+      }
     });
   }
 
