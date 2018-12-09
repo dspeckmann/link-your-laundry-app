@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-fab bottom right>
     <button ion-fab color="secondary" (click)="add()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
@@ -27,7 +27,7 @@
       There are no active laundries at the moment.
     </ion-card-content>
   </ion-card>
-  <ion-card *ngFor="let activeLaundry of activeLaundries">
+  <ion-card *ngFor="let activeLaundry of activeLaundries" (click)="edit(activeLaundry)">
     <ion-card-header>
       {{activeLaundry.laundryTemplate.name}}
     </ion-card-header>

@@ -5,6 +5,7 @@ import { ActiveLaundry } from '../../interfaces/active-laundry';
 import { AddActiveLaundryPage } from '../add-active-laundry/add-active-laundry';
 import * as moment from 'moment';
 import { LaundryStatus } from '../../interfaces/laundry-status';
+import { ActiveLaundryDetailsPage } from '../active-laundry-details/active-laundry-details';
 
 @IonicPage()
 @Component({
@@ -35,6 +36,10 @@ export class ActiveLaundryListPage {
         refresher.complete();
       }
     });
+  }
+
+  edit(laundry: ActiveLaundry) {
+    this.navCtrl.push(ActiveLaundryDetailsPage, { laundry });
   }
 
   add() {
