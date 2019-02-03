@@ -18,6 +18,9 @@ import { ActiveLaundryDetailsPage } from '../pages/active-laundry-details/active
 import { AddActiveLaundryPage } from '../pages/add-active-laundry/add-active-laundry';
 import { EditLaundryTemplatePage } from '../pages/edit-laundry-template/edit-laundry-template';
 import { MessageProvider } from '../providers/message/message';
+import { UserProvider } from '../providers/user/user';
+import { InviteUserPage } from '../pages/invite-user/invite-user';
+import { InvitationsListPage } from '../pages/invitations-list/invitations-list';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { MessageProvider } from '../providers/message/message';
     ActiveLaundryDetailsPage,
     LaundryTemplateListPage,
     EditLaundryTemplatePage,
-    SettingsPage
+    SettingsPage,
+    InviteUserPage,
+    InvitationsListPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,9 @@ import { MessageProvider } from '../providers/message/message';
     ActiveLaundryDetailsPage,
     LaundryTemplateListPage,
     EditLaundryTemplatePage,
-    SettingsPage
+    SettingsPage,
+    InviteUserPage,
+    InvitationsListPage
   ],
   providers: [
     StatusBar,
@@ -56,7 +63,8 @@ import { MessageProvider } from '../providers/message/message';
     LaundryProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-    MessageProvider
+    MessageProvider,
+    UserProvider
   ]
 })
 export class AppModule {}
