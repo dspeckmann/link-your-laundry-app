@@ -12,7 +12,7 @@ import { LoginPage } from '../pages/login/login';
 })
 export class MyApp {
   @ViewChild('rootNav') nav: NavController;
-  rootPage: any = TabsPage;
+  rootPage: any = null;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, authenticationProvider: AuthenticationProvider) {
     platform.ready().then(() => {

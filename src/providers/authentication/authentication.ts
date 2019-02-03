@@ -1,6 +1,6 @@
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, ReplaySubject } from 'rxjs';
 import { AppConfig } from '../../app/app.config';
 import { LoginResponse } from '../../interfaces/login-response';
 import { Storage } from '@ionic/storage';
@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
 export class AuthenticationProvider {
 
   private token: string;
-  private authenticationSubject: Subject<boolean> = new BehaviorSubject<boolean>(false);
+  private authenticationSubject: Subject<boolean> = new ReplaySubject<boolean>();
 
   constructor(private http: HttpClient, private storage: Storage) {
   }
@@ -41,8 +41,6 @@ export class AuthenticationProvider {
 
   public login(email: string, password: string) {
     this.http.post<LoginResponse>(AppConfig.apiUrl + 'authentication', { username: email, password }).subscribe(res => {
-      console.log('Logged in');
-      console.log(res);
       this.token = res.token;
       this.storage.set('token', this.token);
       this.authenticationSubject.next(true);

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LaundryProvider } from '../../providers/laundry/laundry';
 import { EditLaundryTemplatePage } from '../edit-laundry-template/edit-laundry-template';
 import { LaundryTemplate } from '../../interfaces/laundry-template';
+import { MessageProvider } from '../../providers/message/message';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,7 @@ import { LaundryTemplate } from '../../interfaces/laundry-template';
 export class LaundryTemplateListPage {
   laundryTemplates: LaundryTemplate[] = [];
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private laundryProvider: LaundryProvider) {
+  constructor(public navCtrl: NavController, private messageProvider: MessageProvider, public navParams: NavParams, private laundryProvider: LaundryProvider) {
   }
 
   ionViewWillEnter() {
@@ -26,7 +27,7 @@ export class LaundryTemplateListPage {
         refresher.complete();
       }
     }, err => {
-      this.alertCtrl.create({ title: 'Error', message: 'Laundry templates could not be loaded.' }).present();
+      this.messageProvider.showErrorMessage('Laundry templates could not be loaded.');
       if(refresher) {
         refresher.complete();
       }

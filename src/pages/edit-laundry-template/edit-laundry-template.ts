@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { LaundryTemplate } from '../../interfaces/laundry-template';
 import { LaundryProvider } from '../../providers/laundry/laundry';
 import { Observable } from 'rxjs';
+import { MessageProvider } from '../../providers/message/message';
 
 /**
  * Generated class for the EditLaundryTemplatePage page.
@@ -20,7 +21,8 @@ export class EditLaundryTemplatePage {
 
   laundryTemplate: LaundryTemplate;
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private laundryProvider: LaundryProvider) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, private laundryProvider: LaundryProvider,
+    private messageProvider: MessageProvider) {
     this.laundryTemplate = navParams.get('laundryTemplate');
   }
 
@@ -37,9 +39,10 @@ export class EditLaundryTemplatePage {
     }
 
     observable.subscribe(res => {
+      this.messageProvider.showSuccessMessage('Successfully updated laundry template.');
       this.navCtrl.pop();
     }, err => {
-      this.alertCtrl.create({ title: 'Error', message: 'Laundry template could not be saved.' }).present();
+      this.messageProvider.showErrorMessage('Laundry template could not be saved.');
     });
   }
 

@@ -15,6 +15,7 @@ import { AuthenticationProvider } from '../../providers/authentication/authentic
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
+  enableNotifications = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authenticationProvider: AuthenticationProvider) {
   }

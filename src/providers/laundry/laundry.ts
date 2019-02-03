@@ -36,4 +36,8 @@ export class LaundryProvider {
   public updateLaundryTemplate(laundryTemplate: LaundryTemplate) {
     return this.http.put<LaundryTemplate>(AppConfig.apiUrl + 'laundrytemplates/' + laundryTemplate.id, laundryTemplate);
   }
+
+  public updateActiveLaundry(activeLaundry: ActiveLaundry) {
+    return this.http.put<ActiveLaundry>(AppConfig.apiUrl + 'activelaundries/' + activeLaundry.id, activeLaundry);
+  }
 }

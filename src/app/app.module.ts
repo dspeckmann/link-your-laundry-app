@@ -17,6 +17,7 @@ import { LaundryProvider } from '../providers/laundry/laundry';
 import { ActiveLaundryDetailsPage } from '../pages/active-laundry-details/active-laundry-details';
 import { AddActiveLaundryPage } from '../pages/add-active-laundry/add-active-laundry';
 import { EditLaundryTemplatePage } from '../pages/edit-laundry-template/edit-laundry-template';
+import { MessageProvider } from '../providers/message/message';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { EditLaundryTemplatePage } from '../pages/edit-laundry-template/edit-lau
     AuthenticationProvider,
     LaundryProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    MessageProvider
   ]
 })
 export class AppModule {}

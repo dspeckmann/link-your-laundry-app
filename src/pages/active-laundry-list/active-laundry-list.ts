@@ -6,6 +6,8 @@ import { AddActiveLaundryPage } from '../add-active-laundry/add-active-laundry';
 import * as moment from 'moment';
 import { LaundryStatus } from '../../interfaces/laundry-status';
 import { ActiveLaundryDetailsPage } from '../active-laundry-details/active-laundry-details';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
+import { MessageProvider } from '../../providers/message/message';
 
 @IonicPage()
 @Component({
@@ -16,7 +18,8 @@ export class ActiveLaundryListPage {
   LaundryStatus = LaundryStatus;
   activeLaundries: ActiveLaundry[] = [];
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private laundryProvider: LaundryProvider) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private laundryProvider: LaundryProvider,
+    private authenticationProvider: AuthenticationProvider, private messageProvider: MessageProvider) {
     this.updateLaundryStatus();
   }
 
@@ -31,7 +34,7 @@ export class ActiveLaundryListPage {
         refresher.complete();
       }
     }, err => {
-      this.alertCtrl.create({ title: 'Error', message: 'Active laundries could not be loaded.' }).present();
+      this.messageProvider.showErrorMessage('Active laundries could not be loaded.');
       if(refresher) {
         refresher.complete();
       }
@@ -39,7 +42,8 @@ export class ActiveLaundryListPage {
   }
 
   edit(laundry: ActiveLaundry) {
-    this.navCtrl.push(ActiveLaundryDetailsPage, { laundry });
+    console.log(laundry);
+    this.navCtrl.push(ActiveLaundryDetailsPage, { activeLaundry: laundry });
   }
 
   add() {
@@ -72,6 +76,6 @@ export class ActiveLaundryListPage {
       const left = end.diff(moment());
       laundry.timeLeft = moment(left).toDate();
     });
-    setTimeout(() => this.updateLaundryStatus(), 1000);
+    setTimeout(() => this.updateLaundryStatus(), 500);
   }
 }

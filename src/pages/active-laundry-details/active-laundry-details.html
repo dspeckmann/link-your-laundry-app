@@ -14,5 +14,42 @@
 
 
 <ion-content padding>
-
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-label type="text">{{activeLaundry?.laundryTemplate?.name}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Detergent</ion-label>
+    <ion-label type="text">{{activeLaundry?.laundryTemplate?.detergent}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Wash Cycle</ion-label>
+    <ion-label type="text">{{activeLaundry?.laundryTemplate?.washCycle}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Wash Duration</ion-label>
+    <ion-label type="text">{{activeLaundry?.laundryTemplate?.washDuration}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Wash Start</ion-label>
+    <ion-label type="text">{{activeLaundry?.washStartTime | date:'shortTime'}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Dry Cycle</ion-label>
+    <ion-label type="text">{{activeLaundry?.laundryTemplate?.dryCycle}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Dry Duration</ion-label>
+    <ion-label type="text">{{activeLaundry?.laundryTemplate?.dryDuration}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Dry Start</ion-label>
+    <ion-label type="text">{{activeLaundry?.dryStartTime | date:'shortTime'}}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="activeLaundry?.status == LaundryStatus.ReadyToDry">
+    <button ion-button full (click)="startDrying()">Start Drying</button>
+  </ion-item>
+  <ion-item *ngIf="activeLaundry?.status == LaundryStatus.Finished && !activeLaundry?.completed">
+    <button ion-button full (click)="takeOut()">Take Out</button>
+  </ion-item>
 </ion-content>
