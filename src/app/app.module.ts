@@ -22,6 +22,8 @@ import { UserProvider } from '../providers/user/user';
 import { InviteUserPage } from '../pages/invite-user/invite-user';
 import { InvitationsListPage } from '../pages/invitations-list/invitations-list';
 import { AboutPage } from '../pages/about/about';
+import { ComponentsModule } from '../components/components.module';
+import { LaundryCardComponent } from '../components/laundry-card/laundry-card';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,15 @@ import { AboutPage } from '../pages/about/about';
     SettingsPage,
     InviteUserPage,
     InvitationsListPage,
-    AboutPage
+    AboutPage,
+    LaundryCardComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { LaundryProvider } from '../../providers/laundry/laundry';
 import { ActiveLaundry } from '../../interfaces/active-laundry';
 import { AddActiveLaundryPage } from '../add-active-laundry/add-active-laundry';
-import * as moment from 'moment';
 import { LaundryStatus } from '../../interfaces/laundry-status';
 import { ActiveLaundryDetailsPage } from '../active-laundry-details/active-laundry-details';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
@@ -20,7 +19,6 @@ export class ActiveLaundryListPage {
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private laundryProvider: LaundryProvider,
     private authenticationProvider: AuthenticationProvider, private messageProvider: MessageProvider) {
-    this.updateLaundryStatus();
   }
 
   ionViewWillEnter() {
@@ -48,33 +46,5 @@ export class ActiveLaundryListPage {
 
   add() {
     this.navCtrl.push(AddActiveLaundryPage);
-  }
-
-  updateLaundryStatus() {
-    this.activeLaundries.forEach(laundry => {
-      let start: moment.Moment;
-      let end: moment.Moment;
-      if(laundry.dryStartTime) {
-        start = moment(laundry.dryStartTime);
-        end = start.add(moment.duration(laundry.laundryTemplate.dryDuration));
-        if(end > moment()) {
-          laundry.status = LaundryStatus.Drying;
-        } else {
-          laundry.status = LaundryStatus.Finished;
-        }
-      } else {
-        start = moment(laundry.washStartTime);
-        end = start.add(moment.duration(laundry.laundryTemplate.washDuration));
-        if(end > moment()) {
-          laundry.status = LaundryStatus.Washing;
-        } else {
-          laundry.status = LaundryStatus.ReadyToDry;
-        }
-      }
-
-      const left = end.diff(moment());
-      laundry.timeLeft = moment(left).toDate();
-    });
-    setTimeout(() => this.updateLaundryStatus(), 100);
   }
 }

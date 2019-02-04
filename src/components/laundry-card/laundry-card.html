@@ -1,0 +1,21 @@
+<ion-card>
+  <img *ngIf="laundry.status == LaundryStatus.Washing || laundry.status == LaundryStatus.ReadyToDry" src="assets/imgs/washing-machine.svg" class="status-icon">
+  <img *ngIf="laundry.status == LaundryStatus.Drying || laundry.status == LaundryStatus.Finished" src="assets/imgs/dryer.svg" class="status-icon">
+  <ion-card-header>
+    {{laundry.laundryTemplate.name}}
+  </ion-card-header>
+  <ion-card-content [ngSwitch]="laundry.status">
+    <p *ngSwitchCase="LaundryStatus.Washing">
+      Washing<br />{{laundry.timeLeft | date:'h:mm:ss'}} left
+    </p>
+    <p *ngSwitchCase="LaundryStatus.ReadyToDry" style="color:green;">
+      Ready to dry
+    </p>
+    <p *ngSwitchCase="LaundryStatus.Drying">
+      Drying<br />{{laundry.timeLeft | date:'h:mm:ss'}} left
+    </p>
+    <p *ngSwitchCase="LaundryStatus.Finished" style="color:green;">
+      Finished
+    </p>
+  </ion-card-content>
+</ion-card>
