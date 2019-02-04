@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from '../../interfaces/user';
 
 /**
  * Generated class for the InvitationsListPage page.
@@ -14,6 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'invitations-list.html',
 })
 export class InvitationsListPage {
+  user: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
