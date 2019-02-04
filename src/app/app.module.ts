@@ -23,7 +23,6 @@ import { InviteUserPage } from '../pages/invite-user/invite-user';
 import { InvitationsListPage } from '../pages/invitations-list/invitations-list';
 import { AboutPage } from '../pages/about/about';
 import { ComponentsModule } from '../components/components.module';
-import { LaundryCardComponent } from '../components/laundry-card/laundry-card';
 
 @NgModule({
   declarations: [
@@ -38,8 +37,7 @@ import { LaundryCardComponent } from '../components/laundry-card/laundry-card';
     SettingsPage,
     InviteUserPage,
     InvitationsListPage,
-    AboutPage,
-    LaundryCardComponent
+    AboutPage
   ],
   imports: [
     BrowserModule,
