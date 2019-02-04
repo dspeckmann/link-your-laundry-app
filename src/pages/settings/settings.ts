@@ -6,6 +6,7 @@ import { UserProvider } from '../../providers/user/user';
 import { MessageProvider } from '../../providers/message/message';
 import { InviteUserPage } from '../invite-user/invite-user';
 import { InvitationsListPage } from '../invitations-list/invitations-list';
+import { AboutPage } from '../about/about';
 
 @IonicPage()
 @Component({
@@ -48,5 +49,9 @@ export class SettingsPage {
     }
 
     return this.user.pendingActiveInvitations.length + this.user.pendingPassiveInvitations.length;
+  }
+
+  about() {
+    this.navCtrl.push(AboutPage);
   }
 }

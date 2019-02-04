@@ -21,6 +21,7 @@ import { MessageProvider } from '../providers/message/message';
 import { UserProvider } from '../providers/user/user';
 import { InviteUserPage } from '../pages/invite-user/invite-user';
 import { InvitationsListPage } from '../pages/invitations-list/invitations-list';
+import { AboutPage } from '../pages/about/about';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { InvitationsListPage } from '../pages/invitations-list/invitations-list'
     EditLaundryTemplatePage,
     SettingsPage,
     InviteUserPage,
-    InvitationsListPage
+    InvitationsListPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { InvitationsListPage } from '../pages/invitations-list/invitations-list'
     EditLaundryTemplatePage,
     SettingsPage,
     InviteUserPage,
-    InvitationsListPage
+    InvitationsListPage,
+    AboutPage
   ],
   providers: [
     StatusBar,

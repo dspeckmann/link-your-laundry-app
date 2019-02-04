@@ -28,6 +28,8 @@
     </ion-card-content>
   </ion-card>
   <ion-card *ngFor="let activeLaundry of activeLaundries" (click)="edit(activeLaundry)">
+    <img *ngIf="activeLaundry.status == LaundryStatus.Washing || activeLaundry.status == LaundryStatus.ReadyToDry" src="assets/imgs/washing-machine.svg" class="status-icon">
+    <img *ngIf="activeLaundry.status == LaundryStatus.Drying || activeLaundry.status == LaundryStatus.Finished" src="assets/imgs/dryer.svg" class="status-icon">
     <ion-card-header>
       {{activeLaundry.laundryTemplate.name}}
     </ion-card-header>
@@ -39,7 +41,7 @@
         Ready to dry
       </p>
       <p *ngSwitchCase="LaundryStatus.Drying">
-        Washing<br />{{activeLaundry.timeLeft | date:'h:mm:ss'}} left
+        Drying<br />{{activeLaundry.timeLeft | date:'h:mm:ss'}} left
       </p>
       <p *ngSwitchCase="LaundryStatus.Finished" style="color:green;">
         Finished

@@ -51,7 +51,6 @@ export class ActiveLaundryListPage {
   }
 
   updateLaundryStatus() {
-    // Not working properly
     this.activeLaundries.forEach(laundry => {
       let start: moment.Moment;
       let end: moment.Moment;
@@ -76,6 +75,6 @@ export class ActiveLaundryListPage {
       const left = end.diff(moment());
       laundry.timeLeft = moment(left).toDate();
     });
-    setTimeout(() => this.updateLaundryStatus(), 500);
+    setTimeout(() => this.updateLaundryStatus(), 100);
   }
 }
