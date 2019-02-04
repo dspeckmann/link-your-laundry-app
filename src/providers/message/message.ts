@@ -9,7 +9,7 @@ export class MessageProvider {
   }
 
   public showSuccessMessage(message: string) {
-    this.toastCtrl.create({ message }).present();
+    this.toastCtrl.create({ message, duration: 2000 }).present();
   }
 
   public showErrorMessage(message: string) {
