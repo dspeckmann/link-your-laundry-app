@@ -1,18 +1,18 @@
-<!--
-  Generated template for the InvitationsListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Pending Invitations</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-list>
+    <ion-list-header *ngIf="user.pendingPassiveInvitations.length > 0">Groups you have been invited to</ion-list-header>
+    <ion-item *ngFor="let invitation of user.pendingPassiveInvitations">
+      <ion-label>{{invitation.invitedUser.username}}</ion-label>
+    </ion-item>
+    <ion-list-header *ngIf="user.pendingActiveInvitations.length > 0">Users you have invited</ion-list-header>
+    <ion-item *ngFor="let invitation of user.pendingActiveInvitations">
+        <ion-label>{{invitation.groupOwner.username}}</ion-label>
+      </ion-item>
+  </ion-list>
 </ion-content>

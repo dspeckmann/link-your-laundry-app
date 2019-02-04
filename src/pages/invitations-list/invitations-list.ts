@@ -18,6 +18,8 @@ export class InvitationsListPage {
   user: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user = navParams.get('user');
+    console.log(this.user);
   }
 
   ionViewDidLoad() {
