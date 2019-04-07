@@ -40,7 +40,7 @@ export class AuthenticationProvider {
   }
 
   public login(email: string, password: string) {
-    this.http.post<LoginResponse>(AppConfig.apiUrl + 'authentication', { username: email, password }).subscribe(res => {
+    this.http.post<LoginResponse>(AppConfig.apiUrl + 'authentication', { email, password }).subscribe(res => {
       this.token = res.token;
       this.storage.set('token', this.token);
       this.authenticationSubject.next(true);
