@@ -35,6 +35,8 @@ export class AddActiveLaundryPage {
     });
   }
 
+  // TODO: Add ability to schedule laundry with a reminder
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddActiveLaundryPage');
   }
