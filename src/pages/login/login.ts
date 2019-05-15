@@ -22,12 +22,15 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private authenticationProvider: AuthenticationProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-  login() {
-    this.authenticationProvider.login(this.email, this.password);
+  async login() {
+    console.log('Logging in...');
+    try {
+      await this.authenticationProvider.login(this.email, this.password);
+      console.log('Logged in successfully!');
+      this.navCtrl.pop();
+    } catch(err) {
+      console.log('Error during login: ' + err);
+    }
   }
 
 }

@@ -12,21 +12,13 @@ import { LoginPage } from '../pages/login/login';
 })
 export class MyApp {
   @ViewChild('rootNav') nav: NavController;
-  rootPage: any = null;
+  rootPage: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, authenticationProvider: AuthenticationProvider) {
-    platform.ready().then(() => {
-      authenticationProvider.checkAuthentication().subscribe(
-        authenticated => {
-          statusBar.styleDefault();
-          splashScreen.hide();
-          if(authenticated) {
-            this.rootPage = TabsPage;
-          } else {
-            this.rootPage = LoginPage;
-          }
-        }
-      );
+    authenticationProvider.loadTokenFromStorage().then(res => {
+      this.rootPage = TabsPage;
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
 }

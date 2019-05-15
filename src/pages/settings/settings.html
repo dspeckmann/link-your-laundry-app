@@ -7,21 +7,29 @@
 <ion-content>
   <button ion-item (click)="about()">About this App</button>
   <ion-list-header>
-    <ion-label>Your Group</ion-label>
-  </ion-list-header>
-  <ion-item *ngIf="(user?.groupOwnerId == null || user?.groupOwnerId == user?.id) && user?.groupMembers?.length < 1">
-    <ion-label>No members</ion-label>
-  </ion-item>
-  <button ion-item *ngIf="getNumberOfPendingInvitations() > 0" (click)="showInvitations()">{{getNumberOfPendingInvitations()}} pending invitations</button>
-  <button *ngIf="user?.groupOwnerId == null || user?.groupOwnerId == user?.id" ion-item (click)="invite()">Invite User</button>
-  <button *ngIf="user?.groupOwnerId != null && user?.groupOwnerId != user?.id" ion-item (click)="leave()">Leave Group</button>
-  <ion-list-header>
     <ion-label>Your Account</ion-label>
   </ion-list-header>
+  <ion-item>
+    <ion-label *ngIf="loggedIn && user && user.username">Logged in as {{user.username}}</ion-label>
+    <ion-label *ngIf="loggedIn && user && !user.username">Logged in as {{user.email}}</ion-label>
+    <ion-label *ngIf="!loggedIn">Not logged in</ion-label>
+  </ion-item>
   <ion-item>
     <ion-label>Notifications</ion-label>
     <ion-toggle [(ngModel)]="enableNotifications"></ion-toggle>
   </ion-item>
-  <button ion-item (click)="logout()">Logout</button>
+  <button ion-item (click)="login()" *ngIf="!loggedIn">Login</button>
+  <button ion-item (click)="logout()" *ngIf="loggedIn">Logout</button>
   <button ion-item (click)="delete()">Delete My Account</button>
+  <ng-container *ngIf="loggedIn">
+    <ion-list-header>
+      <ion-label>Your Group</ion-label>
+    </ion-list-header>
+    <ion-item *ngIf="(user?.groupOwnerId == null || user?.groupOwnerId == user?.id) && user?.groupMembers?.length < 1">
+      <ion-label>No members</ion-label>
+    </ion-item>
+    <button ion-item *ngIf="getNumberOfPendingInvitations() > 0" (click)="showInvitations()">{{getNumberOfPendingInvitations()}} pending invitations</button>
+    <button *ngIf="user?.groupOwnerId == null || user?.groupOwnerId == user?.id" ion-item (click)="invite()">Invite User</button>
+    <button *ngIf="user?.groupOwnerId != null && user?.groupOwnerId != user?.id" ion-item (click)="leave()">Leave Group</button>
+  </ng-container>
 </ion-content>

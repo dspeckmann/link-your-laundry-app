@@ -7,6 +7,8 @@ import { MessageProvider } from '../../providers/message/message';
 import { InviteUserPage } from '../invite-user/invite-user';
 import { InvitationsListPage } from '../invitations-list/invitations-list';
 import { AboutPage } from '../about/about';
+import { LoginPage } from '../login/login';
+import { AuthenticationState } from '../../enums/authentication-state';
 
 @IonicPage()
 @Component({
@@ -16,23 +18,33 @@ import { AboutPage } from '../about/about';
 export class SettingsPage {
   user: User;
   enableNotifications = true; // TODO: Save this setting
+  loggedIn = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authenticationProvider: AuthenticationProvider,
     private userProvider: UserProvider, private messageProvider: MessageProvider) {
-    userProvider.getMe().subscribe(res => {
-      console.log(res);
-      this.user = res;
-    }, err => {
-      messageProvider.showErrorMessage('Could not get account information.');
-    });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad SettingsPage');
+    this.loggedIn = this.authenticationProvider.getAuthenticationState() == AuthenticationState.Authenticated;
+    if(this.loggedIn) {
+      this.userProvider.getMe().subscribe(res => {
+        console.log(res);
+        this.user = res;
+      }, err => {
+        this.messageProvider.showErrorMessage('Could not get account information.');
+      });
+    }
+  }
+
+  login() {
+    this.navCtrl.push(LoginPage);
   }
 
   logout() {
     this.authenticationProvider.logout();
+    this.messageProvider.showSuccessMessage('Logged out.');
+    this.loggedIn = false;
   }
 
   invite() {
